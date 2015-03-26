@@ -4,16 +4,25 @@ from django.db import models
 
 class Zones(models.Model):
     name = models.CharField(max_length=30)
-    superior_zone = models.ForeignKey("self")
+    superior_zone = models.ForeignKey("self", null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 class Cities(models.Model):
     name = models.CharField(max_length=30)
     zone = models.ForeignKey(Zones)
 
+    def __str__(self):
+        return self.name
+
 class Owners(models.Model):
     name = models.CharField(max_length=30)
     phone = models.CharField(max_length=30)
     email = models.EmailField()
+
+    def __str__(self):
+        return self.name
 
 class Reviews(models.Model):
     text = models.TextField()
@@ -21,6 +30,9 @@ class Reviews(models.Model):
     hotel = models.ForeignKey("Hotels")
     author = models.CharField(max_length=30)
     grade = models.IntegerField()
+
+    def __str__(self):
+        return self.text[0:20]
 
 class Hotels(models.Model):
     name = models.CharField(max_length=30)
@@ -30,3 +42,6 @@ class Hotels(models.Model):
     city = models.ForeignKey(Cities)
     price = models.CharField(max_length=30)
     owner = models.ForeignKey(Owners)
+
+    def __str__(self):
+        return self.name
