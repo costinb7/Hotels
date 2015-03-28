@@ -1,12 +1,16 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import url, include
+from main_app import views
+import main_app
+from rest_framework.routers import DefaultRouter
 from django.contrib import admin
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'hotels1.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+router = DefaultRouter()
+router.register(r'hotels', views.HotelsViewSet)
+router.register(r'owners', views.OwnersViewSet)
+router.register(r'cities', views.CitiesViewSet)
 
-    url(r'^admin/', include(admin.site.urls)),
+urlpatterns = [
+    url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls',
                                namespace='rest_framework')),
-)
+]

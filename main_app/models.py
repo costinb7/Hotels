@@ -39,9 +39,9 @@ class Hotels(models.Model):
     description = models.TextField()
     facilities = models.TextField()
     location = models.TextField()
-    city = models.ForeignKey(Cities)
+    city = models.ForeignKey(Cities, related_name='hotels')
     price = models.CharField(max_length=30)
-    owner = models.ForeignKey(Owners)
+    owner = models.ForeignKey(Owners, related_name='hotels')
 
     def __str__(self):
         return self.name
