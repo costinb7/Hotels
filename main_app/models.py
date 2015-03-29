@@ -27,7 +27,7 @@ class Owners(models.Model):
 class Reviews(models.Model):
     text = models.TextField()
     date = models.DateTimeField('date published')
-    hotel = models.ForeignKey("Hotels")
+    hotel = models.ForeignKey("Hotels", related_name='reviews')
     author = models.CharField(max_length=30)
     grade = models.IntegerField()
 
